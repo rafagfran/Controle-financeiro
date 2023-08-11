@@ -220,6 +220,7 @@ public class TelaPrincipal {
     }
 
     public static void main(String[] args) {
+        // Cria uma instância da classe TelaPrincipal ao executar o programa.
         TelaPrincipal telaPrincipal = new TelaPrincipal();
     
     }

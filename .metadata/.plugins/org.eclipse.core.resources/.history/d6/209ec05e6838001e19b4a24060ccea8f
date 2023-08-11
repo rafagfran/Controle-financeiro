@@ -21,7 +21,7 @@ public class TelaPrincipal {
     private JPanel pMenuLateral, pSaldo, pSaldoBanco, pSaldoDinheiro;
     private JButton bEntradas, bSaidas;
     private JLabel logo, saldoTotalTitulo, saldoTotal, saldoBancoTitulo, saldoBanco, saldoDinheiroTitulo, saldoDinheiro;
-    private ImageIcon image;
+    private ImageIcon img;
 
     public TelaPrincipal() {
         initializeComponents();
@@ -39,24 +39,24 @@ public class TelaPrincipal {
         pSaldoDinheiro = new JPanel();
         pSaldo = new JPanel();
         
-        bEntradas = new JButton();
-        bSaidas = new JButton();
+        bEntradas = new JButton("ENTRADA");
+        bSaidas = new JButton("SAIDA");
         
         logo = new JLabel();
-        saldoTotalTitulo = new JLabel();
-        saldoTotal = new JLabel();
+        saldoTotalTitulo = new JLabel("SALDO TOTAL", JLabel.CENTER);
+        saldoTotal = new JLabel("R$ 1000,00", JLabel.CENTER);
         
-        saldoBancoTitulo = new JLabel();
-        saldoBanco = new JLabel();
+        saldoBancoTitulo = new JLabel("SALDO NO BANCO/ PIX", JLabel.CENTER);
+        saldoBanco = new JLabel("R$ 500,00", JLabel.CENTER);
         
-        saldoDinheiroTitulo = new JLabel();
-        saldoDinheiro = new JLabel();
+        saldoDinheiroTitulo = new JLabel("SALDO EM DINHEIRO", JLabel.CENTER);
+        saldoDinheiro = new JLabel("R$ 500,00", JLabel.CENTER);
         
-        image = new ImageIcon("C:/Users/ti2/Downloads/LOGO-UMADERP-MARCA-D'ÁGUA.png");
+        img = new ImageIcon("C:/Users/ti2/Downloads/LOGO-UMADERP-MARCA-D'ÁGUA.png");
     }
 
     private void configureComponents() {
-    	logo.setIcon(image);
+    	logo.setIcon(img);
     	
     	for(int x=0; x<3; x++) {		
     		JLabel labelSaldoTitulo = new JLabel();
@@ -86,11 +86,10 @@ public class TelaPrincipal {
     	}
     }
     
-    private Component createButtons(JButton button, String text) {
+    private Component createButtons(JButton button) {
     	button.setBackground(Color.white);
     	button.setForeground(Color.BLACK);
     	button.setFont(new Font("ARIAL BLACK", Font.BOLD, 12));
-    	button.setText(text);
     	button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     	return button;
     }
@@ -106,16 +105,18 @@ public class TelaPrincipal {
         pMenuLateral.setBackground(new Color(0,23,53));
         pMenuLateral.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         
+        //********add components on Panel**************
         GridBagConstraints gbc = new GridBagConstraints();
         
-        //Adicionar elcomponentes ao painel
+        //logo
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        image.setImage(image.getImage().getScaledInstance(250, 250, 0));
+        img.setImage(img.getImage().getScaledInstance(250, 250, 0));
         pMenuLateral.add(logo, gbc);
-
+        
+        // botão entrada
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
@@ -124,8 +125,9 @@ public class TelaPrincipal {
         gbc.gridy = 1;
         gbc.ipady = 10;
         gbc.insets = new Insets(0, 20, 15, 20);
-        pMenuLateral.add(createButtons(bEntradas, "ENTRADAS"), gbc);
+        pMenuLateral.add(createButtons(bEntradas), gbc);
         
+        // botão saida
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 0;
@@ -133,7 +135,7 @@ public class TelaPrincipal {
         gbc.weighty = 1.0;
         gbc.ipady = 10;
         gbc.insets = new Insets(0, 20, 0, 20);
-        pMenuLateral.add(createButtons(bSaidas, "SAÍDAS"), gbc);
+        pMenuLateral.add(createButtons(bSaidas), gbc);
     }
     
     private void createSaldoPanel(JLabel tituloLabel, JLabel saldoLabel) {
@@ -143,7 +145,6 @@ public class TelaPrincipal {
         
         GridBagConstraints gbc = new GridBagConstraints();
         
-        //Adicionar componentes ao painél
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.gridx = 0;
@@ -220,6 +221,7 @@ public class TelaPrincipal {
     }
 
     public static void main(String[] args) {
+        // Cria uma instância da classe TelaPrincipal ao executar o programa.
         TelaPrincipal telaPrincipal = new TelaPrincipal();
     
     }

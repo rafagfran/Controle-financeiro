@@ -106,16 +106,18 @@ public class TelaPrincipal {
         pMenuLateral.setBackground(new Color(0,23,53));
         pMenuLateral.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         
+        //********add components on Panel**************
         GridBagConstraints gbc = new GridBagConstraints();
         
-        //Adicionar elcomponentes ao painel
+        //logo
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.gridx = 0;
         gbc.gridy = 0;
         image.setImage(image.getImage().getScaledInstance(250, 250, 0));
         pMenuLateral.add(logo, gbc);
-
+        
+        // botão entrada
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
@@ -126,6 +128,7 @@ public class TelaPrincipal {
         gbc.insets = new Insets(0, 20, 15, 20);
         pMenuLateral.add(createButtons(bEntradas, "ENTRADAS"), gbc);
         
+        // botão saida
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 0;
@@ -143,7 +146,6 @@ public class TelaPrincipal {
         
         GridBagConstraints gbc = new GridBagConstraints();
         
-        //Adicionar componentes ao painél
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.gridx = 0;
@@ -220,6 +222,7 @@ public class TelaPrincipal {
     }
 
     public static void main(String[] args) {
+        // Cria uma instância da classe TelaPrincipal ao executar o programa.
         TelaPrincipal telaPrincipal = new TelaPrincipal();
     
     }
