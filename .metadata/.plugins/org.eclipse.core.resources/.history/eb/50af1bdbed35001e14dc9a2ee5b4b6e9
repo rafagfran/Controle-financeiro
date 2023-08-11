@@ -1,8 +1,0 @@
-package interfaces;
-
-public class Main {
-	public static void main(String[] args) {
-		TelaPrincipal inicia = new TelaPrincipal();
-		inicia.iniciaMetodos();
-	}
-}

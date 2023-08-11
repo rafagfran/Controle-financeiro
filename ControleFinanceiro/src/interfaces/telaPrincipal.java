@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+import javax.swing.JComboBox;
 
 public class TelaPrincipal {
 
@@ -21,7 +24,11 @@ public class TelaPrincipal {
     private JPanel pMenuLateral, pSaldo, pSaldoBanco, pSaldoDinheiro;
     private JButton bEntradas, bSaidas;
     private JLabel logo, saldoTotalTitulo, saldoTotal, saldoBancoTitulo, saldoBanco, saldoDinheiroTitulo, saldoDinheiro;
-    private ImageIcon image;
+    private ImageIcon imageLogo, mainIcon;
+    private JComboBox listaMeses;
+    
+    private String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+    		"Novembro", "Dezembro"};
 
     public TelaPrincipal() {
         initializeComponents();
@@ -32,7 +39,7 @@ public class TelaPrincipal {
     }
 
     private void initializeComponents() {
-        frame = new JFrame();
+        frame = new JFrame("Coincare - Controle financeiro");
         
         pMenuLateral = new JPanel();
         pSaldoBanco = new JPanel();
@@ -52,11 +59,22 @@ public class TelaPrincipal {
         saldoDinheiroTitulo = new JLabel();
         saldoDinheiro = new JLabel();
         
-        image = new ImageIcon("C:/Users/ti2/Downloads/LOGO-UMADERP-MARCA-D'ÁGUA.png");
+        listaMeses = new JComboBox(meses);
+        
+        imageLogo = new ImageIcon(this.getClass().getResource("/umaderp.png"));
+        mainIcon = new ImageIcon(this.getClass().getResource("/bank.png"));
+        
     }
-
+    
     private void configureComponents() {
-    	logo.setIcon(image);
+    	logo.setIcon(imageLogo);
+    	
+    	listaMeses.setSelectedIndex(0);
+    	listaMeses.setFont(new Font ("Arial", Font.BOLD, 18));
+    	listaMeses.setBackground(Color.WHITE);
+    	listaMeses.setForeground(Color.BLACK);
+    	listaMeses.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+    	//listaMeses.addActionListener(this);
     	
     	for(int x=0; x<3; x++) {		
     		JLabel labelSaldoTitulo = new JLabel();
@@ -69,29 +87,34 @@ public class TelaPrincipal {
     		labelSaldoTitulo.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
     		labelSaldoTitulo.setHorizontalAlignment(JLabel.CENTER);
         	labelSaldo.setFont(new Font("ARIAL BLACK", Font.BOLD, 24));
+        	labelSaldo.setHorizontalAlignment(JLabel.CENTER);
     		
     		if (x == 0) {
     			labelSaldoTitulo.setText("SALDO TOTAL");
+    			labelSaldo.setText("R$ 1000,00");
     			saldoTotalTitulo = labelSaldoTitulo;
     			saldoTotal = labelSaldo;
     		} else if (x==1) {
     			labelSaldoTitulo.setText("SALDO EM DINHEIRO");
+    			labelSaldo.setText("R$ 500,00");
     			saldoBancoTitulo = labelSaldoTitulo;
     			saldoBanco = labelSaldo;
     		} else if (x==2) {
     			labelSaldoTitulo.setText("SALDO BANCO/PIX");
+    			labelSaldo.setText("R$ 500,00");
     			saldoDinheiroTitulo = labelSaldoTitulo;
     			saldoDinheiro = labelSaldo;
     		}
     	}
     }
-    
-    private Component createButtons(JButton button, String text) {
-    	button.setBackground(Color.white);
-    	button.setForeground(Color.BLACK);
-    	button.setFont(new Font("ARIAL BLACK", Font.BOLD, 12));
+      
+    private Component createButtons(JButton button, String text, int red, int green, int blue) {
+    	button.setBackground(new Color(230,230,230));
+    	button.setForeground(new Color(red, green, blue));
+    	button.setFont(new Font("ARIAL BLACK", Font.BOLD, 16));
     	button.setText(text);
-    	button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+    	button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
+
     	return button;
     }
     
@@ -109,31 +132,41 @@ public class TelaPrincipal {
         GridBagConstraints gbc = new GridBagConstraints();
         
         //Adicionar elcomponentes ao painel
+        
+        
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        image.setImage(image.getImage().getScaledInstance(250, 250, 0));
+        imageLogo.setImage(imageLogo.getImage().getScaledInstance(250, 250, 0));
         pMenuLateral.add(logo, gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weighty = 0.3;
+        gbc.insets = new Insets(0,30,0,30);
+        pMenuLateral.add(listaMeses, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.weighty = 0.0;
         gbc.weightx = 1.0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.ipady = 10;
-        gbc.insets = new Insets(0, 20, 15, 20);
-        pMenuLateral.add(createButtons(bEntradas, "ENTRADAS"), gbc);
+        gbc.insets = new Insets(0, 30, 15, 30);
+        pMenuLateral.add(createButtons(bEntradas, "ENTRADAS",0,138,11), gbc);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.weighty = 1.0;
         gbc.ipady = 10;
-        gbc.insets = new Insets(0, 20, 0, 20);
-        pMenuLateral.add(createButtons(bSaidas, "SAÍDAS"), gbc);
+        gbc.insets = new Insets(0, 30, 0, 30);
+        pMenuLateral.add(createButtons(bSaidas, "SAÍDAS",201,11,0), gbc);
     }
     
     private void createSaldoPanel(JLabel tituloLabel, JLabel saldoLabel) {
@@ -173,6 +206,7 @@ public class TelaPrincipal {
         frame.getContentPane().setBackground(new Color(0,37,74,235));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1360, 768);
+        frame.setIconImage(mainIcon.getImage());
         frame.setLocationRelativeTo(null);
         
         GridBagConstraints gbc = new GridBagConstraints();
