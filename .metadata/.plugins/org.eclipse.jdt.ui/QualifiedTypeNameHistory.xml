@@ -11,13 +11,22 @@
     <fullyQualifiedTypeName name="java.awt.Font"/>
     <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
-    <fullyQualifiedTypeName name="javax.swing.border.Border"/>
-    <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
     <fullyQualifiedTypeName name="javax.swing.border.BevelBorder"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="java.awt.Insets"/>
-    <fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.Component"/>
     <fullyQualifiedTypeName name="javax.print.DocFlavor.URL"/>
+    <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+    <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
+    <fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
+    <fullyQualifiedTypeName name="interfaces.TelaPrincipal"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="javax.swing.JTable"/>
+    <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+    <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
+    <fullyQualifiedTypeName name="javax.swing.border.Border"/>
+    <fullyQualifiedTypeName name="javax.swing.SwingUtilities"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>
