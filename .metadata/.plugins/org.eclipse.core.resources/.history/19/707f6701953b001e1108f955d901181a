@@ -1,0 +1,55 @@
+
+/*
+ * 7 Steps to Connect Application to database
+ * 1)Import the package
+ * 2)Load and Register driver --> com.mysql.jdbc.Driver
+ * 3)Create Connection
+ * 4)Create Statement
+ * 5)Execute the query
+ * 6)process the results
+ * 7)close connection
+ */
+package br.com.dbconnect;
+
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Conexao {
+	public static void main(String[] args) {
+        // Configuração de conexão
+        String url = "jdbc:mysql://localhost:3306/dbcoincare";
+        String username = "seu_usuario";
+        String password = "sua_senha";
+
+        try {
+            // Conectar ao banco de dados
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Criar uma declaração SQL
+            Statement statement = connection.createStatement();
+
+            // Executar uma consulta SQL
+            String query = "SELECT * FROM entrada";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Iterar sobre os resultados e mostrar o conteúdo das colunas
+            while (resultSet.next()) {
+                int id = resultSet.getInt("2");
+                String nome = resultSet.getString("usuario");
+                // Adicione mais colunas conforme necessário
+
+                System.out.println("ID: " + id + ", Nome: " + nome);
+            }
+
+            // Fechar recursos
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,53 @@
+
+/*
+ * 7 Steps to Connect Application to database
+ * 1)Import the package
+ * 2)Load and Register driver --> com.mysql.jdbc.Driver
+ * 3)Create Connection
+ * 4)Create Statement
+ * 5)Execute the query
+ * 6)process the results
+ * 7)close connection
+ */
+package br.com.dbconnect;
+
+import java.sql.*;
+
+public class Conexao {
+	public static Connection conector() {
+		Connection conexao = null;
+		
+		//A linha abaixo chama  driver 
+		String driver = "com.mysql.cj.jdbc.Driver";
+		//Armazenando informaçoes referentes ao banco
+		String url = "jdbc:mysql://localhost:3306/dbcoincare";
+		String user = "root";
+		String password = "admin";
+		//estabelecendo a conexao com  o banco
+		//Na tentativa de estabelecer conexao, caso ocorra uma exeção me mostra a mensagem
+		try {
+			Class.forName(driver);//executa o arquivo do driver
+			conexao = DriverManager.getConnection(url, user, password);//obtem conexao utilizando os paramentros 
+			return conexao;
+		} catch (Exception e) {
+			//a linha abaxo serve de apoio para esclarecer o erro
+			System.out.println(e);
+			return null;
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		Connection connection = conector();
+		 if (connection != null) {
+	            System.out.println("Connected to the database.");
+	            // You can proceed with further operations here
+	        } else {
+	            System.out.println("Failed to connect to the database.");
+	            // Handle the error or exit the program
+	        }
+	}
+}
+
+
+

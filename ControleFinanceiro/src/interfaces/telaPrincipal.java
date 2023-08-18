@@ -1,13 +1,13 @@
 package interfaces;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,24 +17,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
 public class TelaPrincipal {
-
     private JFrame frame;
     private JPanel pMenuLateral, pSaldo, pSaldoBanco, pSaldoDinheiro, pHistoricoEntradas, pHistoricoSaidas;
     private JButton bEntradas, bSaidas;
-    private JLabel logo, saldoTotalTitulo, saldoTotal, saldoBancoTitulo, saldoBanco, saldoDinheiroTitulo, saldoDinheiro, tituloHistoricoEntradas, 
-    				tituloHistoricoSaidas;
+    private JLabel logo, saldoTotalTitulo, saldoTotal, saldoBancoTitulo, saldoBanco, saldoDinheiroTitulo, saldoDinheiro, tituloHistoricoEntradas, tituloHistoricoSaidas;
     private ImageIcon imageLogo, mainIcon;
     private JComboBox listaMeses;
-    
     private String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro",
     		"Novembro", "Dezembro"};
-
+   
     public TelaPrincipal() {
         initializeComponents();
         configureComponents();
@@ -43,7 +40,6 @@ public class TelaPrincipal {
         showFrame();
     }
     
-
     private void initializeComponents() {
         frame = new JFrame("Coincare - Controle financeiro");
         
@@ -53,9 +49,7 @@ public class TelaPrincipal {
         pSaldo = new JPanel();
         pHistoricoEntradas = new JPanel();
         pHistoricoSaidas= new JPanel();
-        
 
-        
         bEntradas = new JButton();
         bSaidas = new JButton();
         
@@ -72,9 +66,8 @@ public class TelaPrincipal {
         
         listaMeses = new JComboBox(meses);
         
-        imageLogo = new ImageIcon(this.getClass().getResource("/umaderp.png"));
-        mainIcon = new ImageIcon(this.getClass().getResource("/bank.png"));
-        
+        imageLogo = new ImageIcon(this.getClass().getResource("/logo.png"));
+        mainIcon = new ImageIcon(this.getClass().getResource("/icon.png"));
     }
     
     private void configureComponents() {
@@ -86,7 +79,7 @@ public class TelaPrincipal {
     	listaMeses.setForeground(Color.BLACK);
     	listaMeses.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
     	//listaMeses.addActionListener(this);
-    	
+    
     	for(int x=0; x<5; x++) {		
     		JLabel labelTitulo = new JLabel();
     		JLabel labelSaldo = new JLabel();
@@ -144,8 +137,8 @@ public class TelaPrincipal {
     	createSaldoPanel(saldoTotalTitulo, saldoTotal);
     	createSaldoPanel(saldoBancoTitulo, saldoBanco);
     	createSaldoPanel(saldoDinheiroTitulo, saldoDinheiro);
-    	createHistoricoPanel("Origem", tituloHistoricoEntradas);
-    	createHistoricoPanel("Destino", tituloHistoricoSaidas);
+    	createHistoricoPanel(tituloHistoricoEntradas);
+    	createHistoricoPanel(tituloHistoricoSaidas);
     }
     private void createMenuLateralPanel() {
     	pMenuLateral.setLayout(new GridBagLayout());
@@ -192,26 +185,11 @@ public class TelaPrincipal {
     
     private void createSaldoPanel(JLabel tituloLabel, JLabel saldoLabel) {
     	JPanel panel = new JPanel();
-    	panel.setLayout(new GridBagLayout());
+    	panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         
-        GridBagConstraints gbc = new GridBagConstraints();
-        
-        //Adicionar componentes ao painél
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.PAGE_START;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.ipady = 5;
-        gbc.weightx = 1.0;
-        panel.add(tituloLabel,gbc);
-        
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weighty = 1.0;
-        panel.add(saldoLabel,gbc);
+        panel.add(tituloLabel,BorderLayout.PAGE_START);
+        panel.add(saldoLabel,BorderLayout.CENTER);
         
         if (tituloLabel == saldoTotalTitulo) {
         	pSaldo = panel;
@@ -222,47 +200,15 @@ public class TelaPrincipal {
         }
     }
     
-    
-    /*
-     * Reformular a criação de tabelas
-     * Organizar a crição das labels de historico
-     */
-    private void createHistoricoPanel(String origemOuDestino, JLabel tituloDaTabela) {
-    	JPanel panel = new JPanel();
-    	String[] columnNames = {"Data", origemOuDestino, "Tipo","Valor"};
-    	Object[][] data = {
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"},
-    			{"24/07/2002", "CAMISETAS", "PIX", "R$ 100,00"}
-    		};
-    	JTable table = new JTable(data, columnNames);
-    	JScrollPane scrollPane = new JScrollPane(table);
+    private void createHistoricoPanel(JLabel tituloDaTabela) {
     	
-    	table.setEnabled(false);
+    	
+    	JPanel panel = new JPanel();
+    	
     	panel.setLayout(new BorderLayout());
     	panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     	panel.add(tituloDaTabela, BorderLayout.PAGE_START); 	
-    	panel.add(table.getTableHeader(), BorderLayout.LINE_START);
-    	panel.add(scrollPane,BorderLayout.CENTER);
-    	
+
     	if (tituloDaTabela == tituloHistoricoEntradas) {
     		pHistoricoEntradas = panel;
     	} else if (tituloDaTabela == tituloHistoricoSaidas) {
@@ -341,8 +287,8 @@ public class TelaPrincipal {
     }
 
     public static void main(String[] args) {
-   
-        SwingUtilities.invokeLater(() -> new TelaPrincipal());
+    	SwingUtilities.invokeLater(() -> new TelaPrincipal());//Evita concorrência. EDT
+    	//TelaPrincipal telaPrincipal = new TelaPrincipal();
     
     }
 }

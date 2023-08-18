@@ -1,0 +1,34 @@
+package br.com.dbconnect;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
+public class JDBC {
+	public static void main(String[] args) {
+		
+		String url = "jdbc:mysql://localhost:3306/dbcoincare";
+		String username="root";
+		String pass="admin";
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			Connection connection = DriverManager.getConnection(url,username,pass);
+			
+			Statement statement=connection.createStatement();
+			
+			ResultSet resultSet=statement.executeQuery("select * from entradas");
+			
+			while(resultSet.next()) {
+				System.out.println(resultSet.getInt(1)+ " "+resultSet.getString(2)+resultSet.getString(3));
+			}
+			
+			connection.close();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}
