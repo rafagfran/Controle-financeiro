@@ -68,7 +68,7 @@ public class TelaPrincipal {
         saldoDinheiroTitulo = new JLabel();
         saldoDinheiro = new JLabel();
         
-        listaMeses = new JComboBox<String>(meses);
+        listaMeses = new JComboBox(meses);
         
         imageLogo = new ImageIcon(this.getClass().getResource("/logo.png"));
         mainIcon = new ImageIcon(this.getClass().getResource("/icon.png"));
