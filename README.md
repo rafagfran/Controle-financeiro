@@ -1,2 +1,4 @@
 # Controle financeiro
-Desenvolvimento de um programa simples para controle de caixa com o objetivo de desenvolver os conhecimentos em JAVA
+Objetivos: 
+- Proporcionar uma solução simples de controle de caixa
+- Desenvolver conhecimentos na linguagem JAVA
